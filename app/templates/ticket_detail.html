@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{ ticket.title }}</h1>
+
+<p><strong>Status:</strong> {{ ticket.status }}</p>
+<p><strong>Priority:</strong> {{ ticket.priority }}</p>
+<p><strong>Created:</strong> {{ ticket.created_at }}</p>
+
+<h3>Description</h3>
+<p>{{ ticket.description }}</p>
+
+<hr>
+
+<h3>Update Ticket Status</h3>
+
+<form method="POST">
+    <select name="status">
+        <option>Open</option>
+        <option>In Progress</option>
+        <option>Resolved</option>
+        <option>Closed</option>
+    </select>
+
+    <button type="submit">Update</button>
+</form>
+
+{% endblock %}

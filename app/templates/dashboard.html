@@ -4,10 +4,23 @@
 <h1>Welcome to the IT Service Desk</h1>
 <p>This is your internal company support portal.</p>
 
-<h3>What you can do:</h3>
-<ul>
-    <li>Submit IT support requests</li>
-    <li>Track ticket status</li>
-    <li>Communicate with technicians</li>
-</ul>
+<h2>Recent Tickets</h2>
+
+{% if tickets %}
+    <ul>
+    {% for ticket in tickets %}
+        <li>
+            <a href="/ticket/{{ ticket.id }}">
+                <strong>{{ ticket.title }}</strong>
+            </a>
+            - Status: {{ ticket.status }}
+            - Priority: {{ ticket.priority }}
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No tickets submitted yet.</p>
+{% endif %}
+
 {% endblock %}
+
