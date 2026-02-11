@@ -170,4 +170,4 @@ This project demonstrates:
 
 ## Author
 Corey Shamburger  
-Full-Stack Developer
+Full-Stack Developer | Software Developer
