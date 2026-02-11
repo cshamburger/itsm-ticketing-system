@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>{{ tech }} Ticket Queue</h1>
+
+{% if tickets %}
+<ul>
+    {% for ticket in tickets %}
+        <li>
+            <a href="/ticket/{{ ticket.id }}">
+                <strong>{{ ticket.title }}</strong>
+            </a>
+            - Priority: {{ ticket.priority }}
+            - Status: {{ ticket.status }}
+        </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No tickets assigned.</p>
+{% endif %}
+
+{% endblock %}

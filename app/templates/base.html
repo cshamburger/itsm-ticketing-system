@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>ITSM Ticketing System</title>
+
     <style>
         body {
             font-family: Arial, Helvetica, sans-serif;
@@ -37,17 +38,42 @@
         .nav a:hover {
             text-decoration: underline;
         }
+
+        .queues {
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        .queues a {
+            color: #444;
+            margin-right: 10px;
+        }
     </style>
 </head>
+
 <body>
 
 <div class="container">
+
     <div class="nav">
         <a href="/">Dashboard</a>
         <a href="/submit">Submit Ticket</a>
     </div>
 
+    <hr>
+
+    <div class="queues">
+        <b>Technician Queues:</b><br>
+        <a href="/queue/Helpdesk">Helpdesk</a>
+        <a href="/queue/Network Team">Network</a>
+        <a href="/queue/Desktop Support">Desktop</a>
+        <a href="/queue/System Administrator">SysAdmin</a>
+    </div>
+
+    <hr>
+
     {% block content %}{% endblock %}
+
 </div>
 
 </body>

@@ -23,6 +23,10 @@ class Ticket(db.Model):
     priority = db.Column(db.String(50), default="Low")
     created_at = db.Column(db.DateTime, server_default=db.func.now())
 
+    # NEW FIELD (ticket routing)
+    assigned_to = db.Column(db.String(150))
+
+    # relationship to user
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __repr__(self):
