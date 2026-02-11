@@ -4,5 +4,8 @@ main = Blueprint('main', __name__)
 
 @main.route('/')
 def home():
-    return "<h1>ITSM Ticketing System Running</h1>"
+    return render_template("dashboard.html")
 
+@main.route('/login')
+def login():
+    return "<h2>Login page coming next...</h2>"
