@@ -23,11 +23,27 @@ class Ticket(db.Model):
     priority = db.Column(db.String(50), default="Low")
     created_at = db.Column(db.DateTime, server_default=db.func.now())
 
-    # NEW FIELD (ticket routing)
+    # routing
     assigned_to = db.Column(db.String(150))
 
     # relationship to user
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
+    # relationship to notes (ONE ticket → MANY notes)
+    notes = db.relationship('Note', backref='ticket', lazy=True)
+
     def __repr__(self):
         return f"<Ticket {self.title}>"
+
+
+# ---------------- TICKET NOTES ----------------
+class Note(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    content = db.Column(db.Text, nullable=False)
+    created_at = db.Column(db.DateTime, server_default=db.func.now())
+
+    # which ticket this note belongs to
+    ticket_id = db.Column(db.Integer, db.ForeignKey('ticket.id'))
+
+    def __repr__(self):
+        return f"<Note {self.id}>"

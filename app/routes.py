@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for
-from .models import Ticket
+from .models import Ticket, Note
 from . import db
 
 main = Blueprint('main', __name__)
@@ -32,7 +32,7 @@ def submit_ticket():
 
         # ---- Technician Assignment ----
         assigned_to = "Helpdesk"
-        
+
         if priority == "Critical":
             assigned_to = "System Administrator"
         elif "vpn" in text:
@@ -42,7 +42,6 @@ def submit_ticket():
         elif "password" in text:
             assigned_to = "Helpdesk"
 
-        # ---- Create Ticket ----
         ticket = Ticket(
             title=title,
             description=description,
@@ -52,8 +51,6 @@ def submit_ticket():
 
         db.session.add(ticket)
         db.session.commit()
-
-        print("TICKET SAVED")
 
         return redirect(url_for('main.home'))
 
@@ -65,11 +62,25 @@ def ticket_detail(ticket_id):
     ticket = Ticket.query.get_or_404(ticket_id)
 
     if request.method == 'POST':
-        ticket.status = request.form['status']
-        db.session.commit()
+
+        # Update status
+        if 'status' in request.form:
+            ticket.status = request.form['status']
+            db.session.commit()
+
+        # Add note
+        if 'note' in request.form:
+            note = Note(
+                content=request.form['note'],
+                ticket_id=ticket.id
+            )
+            db.session.add(note)
+            db.session.commit()
+
         return redirect(url_for('main.ticket_detail', ticket_id=ticket.id))
 
     return render_template("ticket_detail.html", ticket=ticket)
+
 
 @main.route('/queue/<tech>')
 def technician_queue(tech):
