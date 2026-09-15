@@ -21,7 +21,10 @@ def create_app():
     def load_user(user_id):
         return User.query.get(int(user_id))
     
-    from .routes import main
+   from .routes import main
     app.register_blueprint(main)
-    
-    return app
+
+    # Create database tables if they do not already exist
+    with app.app_context():
+    db.create_all()
+
