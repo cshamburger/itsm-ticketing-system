@@ -1,3 +1,4 @@
+<img width="1591" height="1294" alt="itsm-ticketing-system" src="https://github.com/user-attachments/assets/f0e41970-dde3-4c7d-b5a6-2a5a24680644" />
 # ITSM Ticketing System
 
 A full-stack IT Service Management (ITSM) helpdesk platform built with **Python and Flask** that automates ticket triage, routing, and technician workflow.
